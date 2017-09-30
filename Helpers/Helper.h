@@ -29,7 +29,10 @@
 #define PDG_K		  321
 #define PDG_MU    13
 #define	PDG_E     11
-#define	PDG_GAMMA     22
+#define	PDG_GAMMA 22
+#define	PDG_NUE   12
+#define	PDG_NUMU  14
+
 
 void FillModel(CLHEP::HepRandomEngine& engine, twoIP_channel *&CHAN, std::vector<double> &model_params, const Settings &set);
 void GenerateObservables(CLHEP::HepRandomEngine& g, twoIP_channel * CHAN, const FluxFile &flux, const Settings &set, Observables &obs);

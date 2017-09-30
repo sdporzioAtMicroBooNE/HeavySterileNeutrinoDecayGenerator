@@ -11,7 +11,6 @@ void GenerateObservables(CLHEP::HepRandomEngine& engine, twoIP_channel * CHAN, c
 	double  phi = 2.0*M_PI*flat();
 	double  energy  = flux.GetRandomEvent(engine);
 
-
 	// Produce an initial heavy sterile neutrinos
 	SterileNeutrino nus(set.sterileMass, energy, cosTh, phi);
 
@@ -57,6 +56,15 @@ void GenerateObservables(CLHEP::HepRandomEngine& engine, twoIP_channel * CHAN, c
 // Fill model with theoretical parameters depending on the chosen decay channel.
 void FillModel(CLHEP::HepRandomEngine& engine, twoIP_channel *&CHAN, std::vector<double> &model_params, const Settings &set)
 {
+	/* Horrible way to deal with model parameters, but was inherited from previous code.
+	model_params is a vector (of doubles) containing always 5 elements.
+	For 2-body decays they are: (mass of particle 1, mass of particle 2, channel id, pdg1, pdg2)
+	For 3-body decays they are: (boson mediator mass, channel id, channel id... again [?], pdg1, pdg2)
+	Since it is a vector of double, channel ids and pdg codes are converted to double for convenience,
+	then reconverted to int. Decay channels to containing a neutrino in final states have a symbolic
+	muon neutrino pdg code in it (could be any flavour).
+	*/
+
 	switch(set.decayChannel)
 	{
 		case CHAN_ELECPOSI:
@@ -87,8 +95,8 @@ void FillModel(CLHEP::HepRandomEngine& engine, twoIP_channel *&CHAN, std::vector
 		model_params.push_back(0.00); // the neutrino
 		model_params.push_back(MPI0); // the pion0
 		model_params.push_back((double) CHAN_NUPI0);
+		model_params.push_back((double) PDG_NUMU);
 		model_params.push_back((double) PDG_PI0);
-		model_params.push_back(0.);
 		CHAN = new twobody(engine,model_params);
 		break;
 		case CHAN_GAMMA:
@@ -96,7 +104,7 @@ void FillModel(CLHEP::HepRandomEngine& engine, twoIP_channel *&CHAN, std::vector
 		model_params.push_back((double) CHAN_GAMMA); // the pion.
 		model_params.push_back((double) CHAN_GAMMA); // the pion.
 		model_params.push_back((double) PDG_GAMMA);
-		model_params.push_back(0.);
+		model_params.push_back((double) PDG_NUMU);
 		CHAN = new threebody(engine,model_params);
 		break;
 		case CHAN_MUMU:

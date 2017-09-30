@@ -58,15 +58,15 @@ void CompressSettings(Settings &set){
 
 int main(int argc, char* argv[])
 {
-
-	Settings set;
-	CompressSettings(set);
-
 	// Random number generator
 	// art::ServiceHandle<art::RandomNumberGenerator> rng;
 	// CLHEP::HepRandomEngine &engine = rng->getEngine("gen");
 	CLHEP::HepJamesRandom engine;
 	CLHEP::RandFlat flat(engine);
+
+	// Generate settings struct (set) containing fcl settings
+	Settings set;
+	CompressSettings(set);
 
 	// Assign the theoretical parameters of the model (model_params) and the correct decay class (CHAN) depending on the type of decay channel selected in the fhicl file (fDecayChannel)
 	std::vector<double> model_params; 
