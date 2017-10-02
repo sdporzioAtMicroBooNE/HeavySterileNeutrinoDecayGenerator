@@ -70,6 +70,7 @@ std::vector<double> FourMomentum::Direction()
 		else if(p.at(0)>=0.0 && p.at(1) < 0.0) temp.push_back(-phi);
 		else if(p.at(0)<0.0 && p.at(1) >= 0.0) temp.push_back(M_PI-phi);
 		else if(p.at(0)<0.0 && p.at(1) < 0.0)	temp.push_back(-M_PI+phi);
+		else printf("Something horrible happened when trying to calculate direction:\nx:%.2f y:%.2f", p.at(0),p.at(1));
 	}
 
 	return temp;

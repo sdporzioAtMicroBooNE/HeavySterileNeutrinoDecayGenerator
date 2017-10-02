@@ -3,9 +3,10 @@
 
 
 // FluxFile constructor
-FluxFile::FluxFile(std::string fileName, double sterileMass)
+FluxFile::FluxFile(std::string fileName, double inputSterileMass)
 {
 	maxFlux = 0.0;
+	sterileMass = inputSterileMass;
 
 	if(fileName != "none"){
 		int k = 0;
@@ -68,8 +69,8 @@ double FluxFile::GetRandomEvent(CLHEP::HepRandomEngine& r) const
 	double normFlux = 0.0;
 	double energy = 0.0;
 	double current = 0;
-	double eMax = energyValues.front();
-	double eMin = energyValues.back();
+	double eMax = energyValues.back();
+	double eMin = energyValues.front();
 
 	// Pick random points in flux spectrum space
 	energy = (eMax-eMin)*flat()+eMin;

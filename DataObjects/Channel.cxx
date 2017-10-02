@@ -602,7 +602,6 @@ int twobody::decayfunction(SterileNeutrino nus)
 	double Ea_rf = (nus.mass*nus.mass + Ma*Ma - Mb*Mb)/(2.0*nus.mass);
 	double Eb_rf = (nus.mass*nus.mass + Mb*Mb - Ma*Ma)/(2.0*nus.mass);
 
-	
 	//both decay products have a common *magnitude* of momentum
 	double P_rf = sqrt(Ea_rf*Ea_rf - Ma*Ma);
 
@@ -628,13 +627,9 @@ int twobody::decayfunction(SterileNeutrino nus)
 	IP1.Populate(Ea_rf, momentum_a_rf);
 	IP2.Populate(Eb_rf, momentum_b_rf);
 
-	//	IP1.print("pre-rot IP1");
-	//	IP2.print("pre-rot IP2");
-
 	//We now need to boost and rotate so that the z axis lies along the sterile direction at an appropriate boost.
 	IP1.RotBoostFromParent(&nus.labFrameP); 	
 	IP2.RotBoostFromParent(&nus.labFrameP); 	
-
 
 	return 0;
 }

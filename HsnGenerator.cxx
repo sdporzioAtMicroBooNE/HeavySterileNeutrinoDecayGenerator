@@ -32,8 +32,8 @@
 bool fPrintHepEvt = true;
 double fSterileMass = 0.246;
 int fDecayChannel = 3;
-int fNumberEvents = 5;
 std::string fFluxFile = "Fluxes/flux.dat";
+int fNumberEvents = 50000;
 double fDistance = 470.; // m 
 double fGlobalTimeOffset = 3125;
 double fBeamWindow = 1600;
@@ -58,6 +58,11 @@ void CompressSettings(Settings &set){
 
 int main(int argc, char* argv[])
 {
+	char* myFluxFile = argv[1];
+	std::string fFluxFile(myFluxFile);
+	fSterileMass = atof(argv[2]);
+	fDecayChannel = atoi(argv[3]);
+
 	// Random number generator
 	// art::ServiceHandle<art::RandomNumberGenerator> rng;
 	// CLHEP::HepRandomEngine &engine = rng->getEngine("gen");
